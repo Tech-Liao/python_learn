@@ -1,0 +1,5 @@
+my=input("我的名字:")
+mate1=input("室友1的名字:")
+mate2=input("室友2的名字:")
+mate3=input("室友3的名字:")
+print("宿舍名字："+my[-1]+mate1[-1]+mate2[-1]+mate3[-1])
