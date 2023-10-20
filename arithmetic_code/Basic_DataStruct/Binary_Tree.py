@@ -74,16 +74,45 @@ class Binary_tree:
         else:
             print("val not in tree")
             return False
-        left=cur.left
-        right=cur.right
+        if cur.left is None or cur.right is None:
+            """只有一个或0个子树"""
+            temp=cur.left or cur.right
+            if cur !=self.head.next:
+                if pre.left==cur:
+                    pre.left=temp
+                else:
+                    pre.right=temp
+            else:
+                self.head.next=temp
+        else:
+            temp=cur.right
+            temp_pre=temp
+            while temp.left is not None:
+                temp_pre=temp
+                temp=temp.left
+            cur.val=temp.val
+            if temp.right!=None:
+                temp_pre.left=temp.right
+                
+            else:
+                temp_pre.left=None
+
 
                 
 
 Tree=Binary_tree()
-x=[i for i in range(0,10)]
-random.shuffle(x)
+x=[1,4,0,8,7,2,3,6,5,9]
 print(x)
 for i in x:
     Tree.insert(i)
+Tree.pre_print(Tree.head.next)
+print()
+Tree.delete(1)
+Tree.pre_print(Tree.head.next)
+print()
+Tree.delete(8)
+Tree.pre_print(Tree.head.next)
+print()
+Tree.delete(0)
 Tree.pre_print(Tree.head.next)
 print()
