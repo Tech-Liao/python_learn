@@ -1,118 +1,104 @@
 """二叉树的链式存储"""
-
-import random
-### 头节点类
-class HeadNode:
-    def __init__(self):
-        self.val=0
-        self.next=None
-
-# 二叉树节点类
 class TreeNode:
+    """二叉树节点的定义"""
     def __init__(self,val):
-        self.right=None
-        self.left=None
         self.val=val
-
-
-# 二叉树
-class Binary_tree:
-    def __init__(self):
-        """定义执行根节点的头节点"""
-        Head=HeadNode()
-        self.head=Head
-
-    def Is_Empty(self):
-        if self.head.next is None:
-            return True
-        else:
-            return False
+        self.left=None
+        self.right=None
         
-    def pre_print(self,root):
+class Binary_Tree:
+    """二叉树定义"""
+    def __init__(self):
+        self.root=None
+
+
+    def insert(self,root,val):
+        """
+        root是二叉树的根，val是需要插入的值
+        返回值是二叉树节点TreeNode
+        """
         if root is None:
-            return
+            return TreeNode(val)
+        """
+        小于节点则插入左子树，大于则插入右子树
+        使用递归方式插入
+        """
+        if root.val>val:
+            root.left=self.insert(root.left,val)
+        if root.val<val:
+            root.right=self.insert(root.right,val)
+        return root
+
+    def delete(self,root,val):
+        if not root:
+            print("val not in tree,or tree is empty")
+            return root
+        "大于root则在右子树，小于在左子树"
+        if root.val>val:
+            root.left=self.delete(root.left,val)
+            return root
+        if root.val<val:
+            root.right=self.delete(root.right,val)
+            return root
+        else:
+            if not root.left:
+                return root.right
+            elif not root.right:
+                return root.left
+            else:
+                curr=root.right
+                pre=curr
+                while curr.left:
+                    pre=curr
+                    curr=curr.left
+                root.val=curr.val
+                pre.left=None
+                return root
+
+    def preorderTraversal(self,root):
+        if not root:
+            return 
         print(root.val,end=' ')
-        self.pre_print(root.left)
-        self.pre_print(root.right)
+        self.preorderTraversal(root.left)
+        self.preorderTraversal(root.right)
 
-    def insert(self,val):
-        node=TreeNode(val)
-        if self.Is_Empty():
-            self.head.next=node
-            return True
-        pre=self.head
-        cur=pre.next
-        while cur:
-            if cur.val>=val:
-                pre=cur
-                cur=cur.left
-            elif cur.val<val:
-                pre=cur
-                cur=cur.right
-
-        if pre.val>=val:
-            pre.left=node
-        else:
-            pre.right=node
-        return True
-    
-    def delete(self,val):
-        if self.Is_Empty():
-            print("tree is empty")
-            return False
-        pre=self.head
-        cur=pre.next
-        while cur:
-            if cur.val==val:
-                break
-            elif cur.val>=val:
-                pre=cur
-                cur=cur.left
-            else:
-                pre=cur
-                cur=cur.right
-        else:
-            print("val not in tree")
-            return False
-        if cur.left is None or cur.right is None:
-            """只有一个或0个子树"""
-            temp=cur.left or cur.right
-            if cur !=self.head.next:
-                if pre.left==cur:
-                    pre.left=temp
-                else:
-                    pre.right=temp
-            else:
-                self.head.next=temp
-        else:
-            temp=cur.right
-            temp_pre=temp
-            while temp.left is not None:
-                temp_pre=temp
-                temp=temp.left
-            cur.val=temp.val
-            if temp.right!=None:
-                temp_pre.left=temp.right
-                
-            else:
-                temp_pre.left=None
+    def inorderTraversal(self,root):
+        if not root:
+            return 
+        self.inorderTraversal(root.left)
+        print(root.val,end=' ')
+        self.inorderTraversal(root.right)
 
 
-                
+    def postorderTraversal(self,root):
+        if not root:
+            return 
+        self.postorderTraversal(root.left)
+        self.postorderTraversal(root.right)
+        print(root.val,end=' ')
 
-Tree=Binary_tree()
-x=[1,4,0,8,7,2,3,6,5,9]
-print(x)
+
+
+x=[14,7,18,3,9,16,19]
+Tree=Binary_Tree()
 for i in x:
-    Tree.insert(i)
-Tree.pre_print(Tree.head.next)
+    Tree.root=Tree.insert(Tree.root,i)
+Tree.inorderTraversal(Tree.root)
 print()
-Tree.delete(1)
-Tree.pre_print(Tree.head.next)
+Tree.root=Tree.delete(Tree.root,14)
+Tree.preorderTraversal(Tree.root)
 print()
-Tree.delete(8)
-Tree.pre_print(Tree.head.next)
+Tree.inorderTraversal(Tree.root)
 print()
-Tree.delete(0)
-Tree.pre_print(Tree.head.next)
+Tree.root=Tree.delete(Tree.root,18)
+Tree.preorderTraversal(Tree.root)
 print()
+Tree.inorderTraversal(Tree.root)
+print()
+Tree.root=Tree.delete(Tree.root,3)
+Tree.preorderTraversal(Tree.root)
+print()
+Tree.inorderTraversal(Tree.root)
+print()
+Tree.root=Tree.delete(Tree.root,1)
+Tree.root=Tree.delete(None,1)
