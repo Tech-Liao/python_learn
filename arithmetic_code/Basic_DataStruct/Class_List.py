@@ -1,10 +1,12 @@
 class ListNode:
+
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
 
 class LinkList:
+
     def __init__(self):
         self.head = None
 
@@ -58,7 +60,7 @@ class LinkList:
         else:
             print("val is not in list")
 
-    def modify_list(self,old,new):
+    def modify_list(self, old, new):
         if self.head is None:
             print("List is None,can not delete")
             return False
@@ -82,7 +84,7 @@ for i in x:
 List1.print_list()
 List2 = LinkList()
 for i in x:
-    List2.insertrail_list(i)
-List2.print_list()
-List2.modify_list(3,7)
+    List2.insert_rail_list(i)
+
+List2.modify_list(3, 7)
 List2.print_list()

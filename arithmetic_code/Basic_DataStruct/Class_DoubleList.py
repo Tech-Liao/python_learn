@@ -1,4 +1,5 @@
 class ListNode:
+
     def __init__(self, val=0, next=None):
         self.val = val
         self.pre = next
@@ -6,6 +7,7 @@ class ListNode:
 
 
 class LinkList:
+
     def __init__(self):
         self.head = None
 
@@ -58,7 +60,7 @@ class LinkList:
             while cur.next is not None:
                 cur = cur.next
             else:
-                cur.next=node
+                cur.next = node
                 node.pre = cur
                 return True
         while index - 1 > 0:
@@ -134,5 +136,5 @@ for i in x:
     list1.insert_rear_list(i)
 
 list1.print_list()
-list1.insert_index_list(0,10)
+list1.insert_index_list(0, 10)
 list1.print_list()

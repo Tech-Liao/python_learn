@@ -163,7 +163,7 @@ train_X = np.stack((train_X5, train_X12)).T
 # print(train_X)
 test_X = np.stack((test_X5, test_X12)).T
 
-lr = LinearRegression(eps=10 ** (-5), times=10000)
+lr = LinearRegression(eps=10**(-5), times=10000)
 # 标准化处理
 s = StandardScaler()
 train_X = s.fit_transform(train_X)

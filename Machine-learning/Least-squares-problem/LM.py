@@ -101,7 +101,6 @@ class LinearRegression:
         return theta_history
 
     def predict(self, X):
-
         """根据参数传递的样本，对样本数据进行预测
 
         Parameters:
@@ -117,7 +116,7 @@ class LinearRegression:
 
         Mat_ones = np.ones((len(X), 1))
         Mat_X = np.matrix(np.hstack((Mat_ones, X)))
-        result = Mat_X*np.matrix(self.theta)
+        result = Mat_X * np.matrix(self.theta)
         return result
 
 
@@ -181,7 +180,7 @@ train_X = np.stack((train_X5, train_X12)).T
 # print(train_X)
 test_X = np.stack((test_X5, test_X12)).T
 
-lr = LinearRegression(eps=10 ** (-5), times=10000)
+lr = LinearRegression(eps=10**(-5), times=10000)
 # 标准化处理
 s = StandardScaler()
 train_X = s.fit_transform(train_X)
@@ -205,7 +204,8 @@ print(lr.loss_)
 
 plt.figure(figsize=(10, 10))
 plt.plot(result, "ro-", label="predict")
-plt.plot(test_y.values, "go-", label="reality")  # pandas读取时serise类型，我们需要转为ndarray
+plt.plot(test_y.values, "go-",
+         label="reality")  # pandas读取时serise类型，我们需要转为ndarray
 plt.title("Function-LM")
 plt.xlabel("number X")
 plt.ylabel("house value")

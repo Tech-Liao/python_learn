@@ -1,10 +1,12 @@
 class Node:
+
     def __init__(self, value):
         self.value = value
         self.next = None
 
 
 class Stack:
+
     def __init__(self):
         self.Head = None
 
@@ -31,7 +33,7 @@ class Stack:
         if self.is_empty():
             print("stack is empty")
             return False
-        return self.Head.val
+        return self.Head.value
 
     def print_stack(self):
         if self.is_empty():
@@ -50,5 +52,5 @@ list1 = [1, 2, 3, 4, 5]
 for i in list1:
     x.push(i)
 x.print_stack()
-node=x.pop()
+node = x.pop()
 print(node.value)
