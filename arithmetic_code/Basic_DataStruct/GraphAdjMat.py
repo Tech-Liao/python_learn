@@ -60,14 +60,52 @@ class GrapgAdjMat:
         for row in self.edge:
             print(row)
 
+    def BFS(self):
+        """
+        邻接矩阵的遍历
+        """
+        res = []
+        cur_point = self.vertex[:]
+        visited = set()
+        queue = [cur_point[0]]
+        visited.add(cur_point[0])
+        while queue:
+            vet = queue.pop(0)
+            index = cur_point.index(vet)
+            res.append(vet)
+            lst_edge = self.edge[index]
+            for i in range(len(lst_edge)):
+                if lst_edge[i] != 0 and self.vertex[i] not in visited:
+                    queue.append(self.vertex[i])
+                    visited.add(self.vertex[i])
+        return res
 
-x = [1, 3, 2, 5, 4]
-edge = [[1, 5], [1, 3], [2, 5], [2, 3], [2, 4], [5, 4]]
+    def DFS(self):
+        res = []
+        visited = set()
+        start_vet = self.vertex[0]
+        self.dfs_helper(visited, res, start_vet)
+        return res
+
+    def dfs_helper(self, visited, res, vet):
+        res.append(vet)
+        visited.add(vet)
+        index = self.vertex.index(vet)
+        lst_edge = self.edge[index]
+        for i in range(len(lst_edge)):
+            if lst_edge[i] != 0 and self.vertex[i] not in visited:
+                self.dfs_helper(visited, res, self.vertex[i])
+
+
+x = [0, 1, 3, 2, 5, 4, 6]
+edge = [[0, 1], [0, 3], [1, 2], [2, 5], [5, 4], [5, 6]]
 graph = GrapgAdjMat(x, edge)
-graph.print()
-graph.delete_edge(1, 5)
-graph.print()
-graph.add_vertex(6)
-graph.print()
-graph.add_edge(6, 3)
-graph.print()
+# graph.print()
+# graph.delete_edge(1, 5)
+# graph.print()
+# graph.add_vertex(6)
+# graph.print()
+# graph.add_edge(6, 3)
+# graph.print()
+print(graph.BFS())
+print(graph.DFS())
